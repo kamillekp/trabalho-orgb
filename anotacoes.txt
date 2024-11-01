@@ -1,0 +1,3 @@
+JAL
+- Clocar o endereço do pc+4 para o registrador 31
+- Pula para endereço de subrotina

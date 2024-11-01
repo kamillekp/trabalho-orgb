@@ -1,0 +1,45 @@
+Programa de teste do MARS. (igual ao que é visto no tutorial em vídeo)
+Ele carrega as duas primeiras posições da memória de dados em R1 e R2, soma esses registradores e armazena em R3. 
+Em seguida, subtrai R3 de R2 e armazena em R3 e compara R3 com R1. 
+Se os registradores forem iguais (deu tudo certo), pula para LB1 e armazena R3 no terceiro endereço de memória. Caso contrário, armazena R0 neste endereço.
+O objetivo do programa é testar as operações básicas que já estão implementadas no processador. 
+A sugestão é inserir as instruções novas após o SW R0, 8(R0), pois (de acordo com a especificação do trabalho) TODAS as instruções já existentes DEVEM continuar funcionando.
+
+Programa com o mesmo comportamento anterior para executar no MARS (o primeiro LUI é necessário para respeitar o segmento .data exigido no MARS): 
+LUI $10, 0X00001001
+inicio:
+LW $1, 0($10)
+LW $2, 4($10)
+ADD $3, $1, $2
+SUB $3, $3, $2
+BEQ $3, $1 LB1
+SW $0, 8($10)
+J inicio
+LB1:
+SW $3, 8($10)
+J inicio
+
+O programa em assembly para executar no MIPS com duas memórias está abaixo. Ele pode ser montado pelo MARS (porém não vai funcionar no MARS por causa do segmento .data).
+
+inicio:
+LW $1, 0($0)
+LW $2, 4($0)
+ADD $3, $1, $2
+SUB $3, $3, $2
+BEQ $3, $1 LB1
+SW $0, 8($0)
+J inicio
+LB1:
+SW $3, 8($0)
+J inicio
+
+Notem que como há duas memórias, ambas podem ser endereçadas a partir do zero.
+
+Cada diretório contém arquivos de memória destinados aos respectivos processadores. 
+MEM_Instruction deve ser carregado na memória de instruções e MEM_Data na de dados (com exceção do MIPS Multiciclo, que possui uma memória para ambos).
+Além disso, a versão do processador com pipeline inclui o arquivo de ROM de controle, pois a instrução J não está implementada na versão original.
+
+
+
+
+
