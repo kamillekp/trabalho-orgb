@@ -5,5 +5,6 @@ Usando o Logisim como meio para implementar as instruções do MIPS em "hardware
   - LH
   - DIV
   - ORI
+    
 Implementação em monociclo, multiciclo e pipeline.
     
